@@ -1,104 +1,60 @@
 # MikBill-EventSystem-PHP-Kit
 
-Набор PHP-скриптов в дополнение функционалу биллинговой системы [АСР "MikBill"](https://mikbill.pro), использующий API "Системы событий" продукта
+Набор скриптов для [системы событий](https://wiki.mikbill.pro/billing/configuration/events) биллинговой системы ["MikBill"](https://mikbill.pro)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/itpanda-llc/mikbill-eventsystem-kit)](https://packagist.org/packages/itpanda-llc/mikbill-eventsystem-kit/stats)
+![Packagist License](https://img.shields.io/packagist/l/itpanda-llc/mikbill-eventsystem-kit)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/itpanda-llc/mikbill-eventsystem-kit)
 
 ## Ссылки
 
 * [Разработка](https://github.com/itpanda-llc)
-* [О проекте (АСР "MikBill")](https://mikbill.pro)
-* [Документация (АСР "MikBill")](https://wiki.mikbill.pro)
-* [Сообщество (АСР "MikBill")](https://mikbill.userecho.com)
+* [О проекте (MikBill)](https://mikbill.pro)
+* [Документация (MikBill)](https://wiki.mikbill.pro)
 
 ## Возможности
 
-* СМС-уведомление и уведомление в социальных сетях ("ВКонтакте", "Одноклассники") абонентов при "платежных событиях" (кредит, лимит, платеж, возврат), а также смене тарифного плана и дальнейшее занесение информации в БД
-* Формирование денежных бонусов (лояльности и за пополнение счета) с занесением в БД (подразумевается дальнейшее зачисление на счета, используя API "Системы платежей" биллинговой системы)
-* Формирование фискального документа, отправка в облачный сервис [Комтет Касса](https://kassa.komtet.ru) и дальнейшая запись информации в БД
-* Удаление параметров скидок при смене тарифного плана (Глобальная и расширенная: тариф, подписки, аренда)
-* "Сброс" PPP-сессий при "платежных событиях" (кредит, лимит, платеж, возврат), а также смене тарифного плана в маршрутизаторах (NAS) семейства [RouterOS](https://mikrotik.com)
+* Уведомление абонентов при платежных событиях, смене тарифного плана и реального IP-адреса, заморозке, блокировке и удалении аккаунта
+* Зачисление денежных бонусов (лояльности и за пополнение счета)
+* Формирование и отправка фискальных документов в облачный сервис ["Комтет Касса"](https://kassa.komtet.ru)
+* Удаление параметров скидок при смене тарифного плана, заморозке, блокировке и удалении аккаунта
+* Сброс PPP-сессий в маршрутизаторах семейства ["RouterOS"](https://mikrotik.com/software) при платежных событиях, смене тарифного плана и реального IP-адреса, заморозке, блокировке и удалении аккаунта
 
 ## Требования
 
-* CentOS >= 7
 * PHP >= 7.2
+* JSON
+* libxml
 * PDO
 * SimpleXML
-* ssh2
-* JSON
-* [smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk) (для СМС-уведомлений)
-* [smsc-sender-php-sdk](https://github.com/itpanda-llc/smsc-sender-php-sdk) (для уведомлений в социальных сетях)
-* [komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk) (для отправки докуменов в сервис [Комтет Касса](https://kassa.komtet.ru))
+* [EvilFreelancer/routeros-api-php](https://github.com/EvilFreelancer/routeros-api-php)
+* [itpanda-llc/smscenter-messenger-php-sdk](https://github.com/itpanda-llc/smscenter-messenger-php-sdk)
+* [itpanda-llc/smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk)
+* [Komtet/komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk)
 
-
-* !! Для продолжения функционала репозитория и расширения возможностей, при пользовании системой [АСР "MikBill"](https://mikbill.pro), дополнительно, рекомендовано применять набор [mikbill-daemonsystem-php-kit](https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit), осуществляющий другие (остальные) полезные действия, вне "Системы событий" биллинга.
-
-## Рекомендуемая установка и подготовка
-
-Создание и переход в директорию, например "mkdir /var/mikbill/__ext/ && cd /var/mikbill/__ext/".
-
-Клонирование необходимых репозиториев:
-
-* git clone https://github.com/itpanda-llc/mikbill-eventsystem-php-kit
-* git clone https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit (...пригодится)
-* git clone https://github.com/itpanda-llc/smspilot-messenger-php-sdk (для СМС-уведомлений)
-* git clone https://github.com/itpanda-llc/smsc-sender-php-sdk (для уведомлений в социальных сетях)
-* git clone https://github.com/Komtet/komtet-kassa-php-sdk (для отправки докуменов в сервис [Комтет Касса](https://kassa.komtet.ru))
-
-Установка прав доступа "chmod -R 755 ./mikbill-eventsystem-php-kit/.sh/".
-
-Конфигурация скриптов (корректирование путей, констант и значений) по пути "/var/mikbill/__ext/mikbill-eventsystem-php-kit/scripts/"
-
-Редактирование файлов биллинговой системы (предварительно, добавление строки "cd /var/mikbill/__ext/mikbill-eventsystem-php-kit/.sh/" во все файлы):
-
-* /var/www/mikbill/admin/sys/scripts/mikbill_payment_event.sh - добавление строки "./PaymentSystem.sh "$2""
-* /var/www/mikbill/admin/sys/scripts/mikbill_tarif_change_event.sh - добавление строки "./TarifChangeSystem.sh "$2""
-* /var/www/mikbill/stat/sys/scripts/mikbill_payment_event.sh - добавление строки "./PaymentClient.sh "$2""
-* /var/www/mikbill/stat/sys/scripts/mikbill_tarif_change_event.sh - добавление строки "./TarifChangeClient.sh "$2""
-
-Пример файла "/var/www/mikbill/admin/sys/scripts/mikbill_payment_event.sh"
+## Установка
 
 ```shell script
-#!/bin/bash
-
-cd /var/mikbill/__ext/mikbill-eventsystem-php-kit/.sh/ || exit
-./PaymentSystem.sh "$2"
+composer require itpanda-llc/mikbill-eventsystem-kit
 ```
 
-или
+## Конфигурация
 
-```shell script
-#!/bin/bash
+Указание
 
-cd /var/mikbill/__ext/mikbill-eventsystem-php-kit/scripts/ || exit
-#/usr/bin/php ./PaymentSMSNotice.php "$2" > /dev/null 2>&1
-#/usr/bin/php ./ReturnSMSNotice.php "$2" > /dev/null 2>&1
-#/usr/bin/php ./LimitSMSNotice.php "$2" > /dev/null 2>&1
-/usr/bin/php ./PaymentSocNotice.php "$2" > /dev/null 2>&1
-/usr/bin/php ./ReturnSocNotice.php "$2" > /dev/null 2>&1
-/usr/bin/php ./LimitSocNotice.php "$2" > /dev/null 2>&1
-/usr/bin/php ./PaymentKomtetReceiptSend.php "$2" > /dev/null 2>&1
-/usr/bin/php ./ReturnKomtetReceiptSend.php "$2" > /dev/null 2>&1
-/usr/bin/php ./PaymentBonusLog.php "$2" > /dev/null 2>&1
-/usr/bin/php ./PaymentLoyaltyBonusLog.php "$2" > /dev/null 2>&1
-/usr/bin/php ./PaymentRouterOSSessionRemove.php "$2" > /dev/null 2>&1
-/usr/bin/php ./ReturnRouterOSSessionRemove.php "$2" > /dev/null 2>&1
-/usr/bin/php ./LimitRouterOSSessionRemove.php "$2" > /dev/null 2>&1
-```
+* Путей к [конфигурационному файлу](https://wiki.mikbill.pro/billing/config_file), интерфейсам и значений констант в [файлах-скриптах](scripts)
+* В файлах биллинговой системы путей и параметров к [файлам-скриптам](scripts) (см. далее)
 
-## Описание скриптов и логики действия
+Для системы
 
-Файлы "(.*)SMSNotice.php" осуществляют отправку СМС-сообщения и его дальнейшую запись в БД
+* [/var/www/mikbill/admin/sys/scripts/mb_event_realip_change.sh](examples/www/mikbill/admin/sys/scripts/mb_event_realip_change.sh)
+* [/var/www/mikbill/admin/sys/scripts/mikbill_onoff_user_event.sh](examples/www/mikbill/admin/sys/scripts/mikbill_onoff_user_event.sh)
+* [/var/www/mikbill/admin/sys/scripts/mikbill_payment_event.sh](examples/www/mikbill/admin/sys/scripts/mikbill_payment_event.sh)
+* [/var/www/mikbill/admin/sys/scripts/mikbill_tarif_change_event.sh](examples/www/mikbill/admin/sys/scripts/mikbill_tarif_change_event.sh)
 
-Файлы "(.*)SocNotice.php" осуществляют отправку сообщения в социальные сети и его дальнейшую запись в БД
+Для кабинета
 
-Файлы "(.*)ReceiptSend.php" осуществляют отправку данных в сервис облачной кассы и их дальнейшую запись в БД
-
-Файлы "(.*)DiscountRemove.php" осуществляют удаление параметров скидок
-
-Файлы "(.*)SessionRemove.php" осуществляют "сброс" PPP-сессии на серверах доступа (NAS)
-
-Файлы "(.*)BonusLog.php" осуществляют формирование бонуса и его дальнейшую запись в БД
-
-##### ..Каждый файл самостоятелен и независим от соседних. Для понимания логики действия и условий срабатывания программ в подробностях, необходимо изучение SQL-запросов в скриптах..
+* [/var/www/mikbill/stat/sys/scripts/mb_event_realip_change.sh](examples/www/mikbill/stat/sys/scripts/mb_event_realip_change.sh)
+* [/var/www/mikbill/stat/sys/scripts/mikbill_onoff_user_event.sh](examples/www/mikbill/stat/sys/scripts/mikbill_onoff_user_event.sh)
+* [/var/www/mikbill/stat/sys/scripts/mikbill_payment_event.sh](examples/www/mikbill/stat/sys/scripts/mikbill_payment_event.sh)
+* [/var/www/mikbill/stat/sys/scripts/mikbill_tarif_change_event.sh](examples/www/mikbill/stat/sys/scripts/mikbill_tarif_change_event.sh)

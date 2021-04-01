@@ -1,27 +1,23 @@
 {
-    "name": "itpanda-llc/mikbill-eventsystem-php-kit",
-    "description": "A set of scripts for using the MikBill billing event system",
-    "type": "library",
-    "keywords": [
-        "panda", "mikbill", "routeros", "mikrotik", "komtetkassa", "notifymail"
-    ],
+    "name": "itpanda-llc/mikbill-eventsystem-kit",
+    "description": "A set of scripts for the event system of the MikBill billing system",
     "homepage": "https://github.com/itpanda-llc/mikbill-eventsystem-php-kit",
     "license": "MIT",
     "authors": [
         {
             "name": "itpanda-llc",
-            "homepage": "https://github.com/itpanda-llc",
-            "role": "developer"
+            "homepage": "https://github.com/itpanda-llc"
         }
     ],
     "require": {
-        "itpanda-llc/smspilot-messenger-php-sdk": "*",
-        "itpanda-llc/smsc-sender-php-sdk": "*",
-        "komtet/komtet-kassa-php-sdk": "*",
+        "php": ">=7.2",
+        "ext-json": "*",
+        "ext-libxml": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
-        "ext-ssh2": "*",
-        "ext-json": "*",
-        "ext-curl": "*"
+        "evilfreelancer/routeros-api-php": "^1.4",
+        "itpanda-llc/smscenter-messenger-sdk": "dev-master",
+        "itpanda-llc/smspilot-messenger-sdk": "dev-master",
+        "komtet/kassa-sdk": "^8.0"
     }
 }
