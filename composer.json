@@ -1,7 +1,7 @@
 {
     "name": "itpanda-llc/mikbill-eventsystem-kit",
     "description": "A set of scripts for the event system of the MikBill billing system",
-    "homepage": "https://github.com/itpanda-llc/mikbill-eventsystem-php-kit",
+    "homepage": "https://github.com/itpanda-llc/mikbill-eventsystem-kit",
     "license": "MIT",
     "authors": [
         {

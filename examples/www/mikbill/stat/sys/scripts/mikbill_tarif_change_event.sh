@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Файл из репозитория MikBill-EventSystem-PHP-Kit
-# https://github.com/itpanda-llc/mikbill-eventsystem-php-kit
+# Файл из репозитория MikBill-EventSystem-Kit
+# https://github.com/itpanda-llc/mikbill-eventsystem-kit
 
 cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-eventsystem-kit/scripts/ || exit
 

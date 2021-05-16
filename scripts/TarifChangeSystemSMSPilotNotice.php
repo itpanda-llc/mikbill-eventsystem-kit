@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-EventSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-eventsystem-php-kit
+ * Файл из репозитория MikBill-EventSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-eventsystem-kit
  */
 
 declare(strict_types=1);
@@ -30,12 +30,6 @@ const MESSAGE = 'Новый тарифный план подключен.';
 
 /** Подпись, добавляемая к сообщению */
 const COMPLIMENT = '***';
-
-/**
- * Временная зона
- * @link https://www.php.net/manual/ru/timezones.php
- */
-const TIME_ZONE = 'Asia/Yekaterinburg';
 
 /** Текст ошибки */
 const ERROR_TEXT = 'Не отправлено';
@@ -93,8 +87,7 @@ $singleton = (new MessengerSdk\Singleton($message, $client['sms_tel']))
     ->setFormat(MessengerSdk\Format::JSON);
 
 try {
-    $dateTime = new DateTime("now",
-        new DateTimeZone(TIME_ZONE));
+    $dateTime = new DateTime("now");
 } catch (Exception $e) {
     exit(sprintf("%s\n", $e->getMessage()));
 }

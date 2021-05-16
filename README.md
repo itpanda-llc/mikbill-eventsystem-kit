@@ -1,4 +1,4 @@
-# MikBill-EventSystem-PHP-Kit
+# MikBill-EventSystem-Kit
 
 Набор скриптов для [системы событий](https://wiki.mikbill.pro/billing/configuration/events) биллинговой системы ["MikBill"](https://mikbill.pro)
 
@@ -28,8 +28,8 @@
 * PDO
 * SimpleXML
 * [EvilFreelancer/routeros-api-php](https://github.com/EvilFreelancer/routeros-api-php)
-* [itpanda-llc/smscenter-messenger-php-sdk](https://github.com/itpanda-llc/smscenter-messenger-php-sdk)
-* [itpanda-llc/smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk)
+* [itpanda-llc/smscenter-messenger-sdk](https://github.com/itpanda-llc/smscenter-messenger-sdk)
+* [itpanda-llc/smspilot-messenger-sdk](https://github.com/itpanda-llc/smspilot-messenger-sdk)
 * [Komtet/komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk)
 
 ## Установка

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-EventSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-eventsystem-php-kit
+ * Файл из репозитория MikBill-EventSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-eventsystem-kit
  */
 
 declare(strict_types=1);
